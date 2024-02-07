@@ -37,11 +37,13 @@ public class Main {
         if(answer == 'y'){
             switch (service){
                 case '1':
+                    findMinMax();
                     break;
                 case '2':
                     inputMinTerbesar();
                     break;
                 case '3':
+                    cutBamboo();
                     break;
                 case '4':
                     hitungGanjil();
@@ -68,6 +70,54 @@ public class Main {
         reuseQuestion('2');
     }
 
+    public static void findMinMax() {
+        System.out.println("Input number with comma:");
+        Scanner input = new Scanner(System.in);
+        String a = input.nextLine();
+
+        String numbersString = a;
+        int[] numbersArray = convertStringToIntArray(numbersString);
+
+        System.out.println(minMax(numbersArray));
+        reuseQuestion('1');
+    }
+
+    public static void cutBamboo(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Masukkan bambu serta panjang ruasnya : ");
+        String batang = input.nextLine();
+        System.out.print("Masukkan silus pemotongan ruas bambu : ");
+        int potong = input.nextInt();
+
+        String ruas[] = batang.split(",");
+
+        System.out.println(ruas[0]);
+        System.out.println(potong);
+
+        for(int k=0; k<potong+1; k++){
+            if(k==0){
+                System.out.println("Initials");
+                for(int i=0; i<ruas.length; i++){
+                    System.out.print("|");
+                    for(int j=0; j<Integer.parseInt(ruas[i])-k; j++){
+                        System.out.print("-");
+                    }
+                    System.out.println("");
+                }
+            }else if(k>0){
+                System.out.println("Cycle Cuts "+k);
+                for(int i=0; i<ruas.length; i++){
+                    System.out.print("|");
+                    for(int j=0; j<Integer.parseInt(ruas[i])-k; j++){
+                        System.out.print("-");
+                    }
+                    System.out.println("");
+                }
+            }
+        }
+        reuseQuestion('3');
+    }
+
     public static int minTerbesar(int[] arr){
         int miner = 0;
         for(int i=0; i<arr.length; i++){
@@ -78,6 +128,22 @@ public class Main {
             }
         }
         return miner;
+    }
+
+    public static String minMax(int[] arr){
+        int min = arr[0];
+        int max = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+
+        return "max: " + max + " min: " + min;
     }
 
     public static int[] convertStringToIntArray(String numbersString) {
@@ -105,11 +171,13 @@ public class Main {
         char inputValue = input.next().charAt(0);
         switch (inputValue){
             case '1':
+                findMinMax();
                 break;
             case '2':
                 inputMinTerbesar();
                 break;
             case '3':
+                cutBamboo();
                 break;
             case '4':
                 hitungGanjil();
