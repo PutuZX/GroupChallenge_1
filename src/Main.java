@@ -39,6 +39,7 @@ public class Main {
                 case '1':
                     break;
                 case '2':
+                    inputMinTerbesar();
                     break;
                 case '3':
                     break;
@@ -49,6 +50,45 @@ public class Main {
         } else{
             menuPage();
         }
+    }
+
+    public static void inputMinTerbesar(){
+        System.out.println("Input number with comma:");
+        Scanner input = new Scanner(System.in);
+        String a = input.nextLine();
+        String numbersString = a;
+        int[] numbersArray = convertStringToIntArray(numbersString);
+
+        int lostMinus = minTerbesar(numbersArray);
+        if(lostMinus == 0){
+            System.out.println("Number not found!");
+        } else{
+            System.out.println("Number: " + lostMinus);
+        }
+        reuseQuestion('2');
+    }
+
+    public static int minTerbesar(int[] arr){
+        int miner = 0;
+        for(int i=0; i<arr.length; i++){
+            if(arr[i]<miner){
+                if((arr[i]-arr[i-1])==-2){
+                    miner = arr[i-1]-1;
+                }
+            }
+        }
+        return miner;
+    }
+
+    public static int[] convertStringToIntArray(String numbersString) {
+        String[] numbersStringArray = numbersString.split(",");
+        int[] numbersArray = new int[numbersStringArray.length];
+
+        for (int i = 0; i < numbersStringArray.length; i++) {
+            numbersArray[i] = Integer.parseInt(numbersStringArray[i]);
+        }
+
+        return numbersArray;
     }
 
     public static void menuPage(){
@@ -67,6 +107,7 @@ public class Main {
             case '1':
                 break;
             case '2':
+                inputMinTerbesar();
                 break;
             case '3':
                 break;
